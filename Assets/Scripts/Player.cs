@@ -5,7 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public float speed = 4.0f;
+    public float speed = 10f;
+
+    [SerializeField] private GameObject playerLaser;
+    [SerializeField] private float laserYOffset = 1.1f;
+    public float fireRate = 0.3f;
+    private float canFire = -1f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,11 @@ public class Player : MonoBehaviour
         PlayerMovement();
         YAxisClamp();
         XWrap();
+
+        if(Input.GetKeyDown(KeyCode.Space) && Time.time > canFire)
+        {
+            FireLaser();
+        }
     }
 
     private void PlayerMovement()
@@ -54,5 +64,16 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(-xWrapPoint, transform.position.y, 0);
         }
+    }
+
+    private void FireLaser()
+    {
+        //add cooldown
+        canFire = Time.time + fireRate;
+
+        //offset of laser
+        Vector3 laserOffset = new Vector3(0, laserYOffset, 0);
+
+        Instantiate(playerLaser, transform.position + laserOffset, Quaternion.identity);
     }
 }
