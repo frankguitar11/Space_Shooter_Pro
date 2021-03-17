@@ -7,10 +7,12 @@ public class Player : MonoBehaviour
 
     public float speed = 10f;
 
-    [SerializeField] private GameObject playerLaser;
-    [SerializeField] private float laserYOffset = 1.1f;
+    [SerializeField] private GameObject _playerLaser;
+    [SerializeField] private float _laserYOffset = 1.1f;
     public float fireRate = 0.3f;
-    private float canFire = -1f;
+    private float _canFire = -1f;
+
+    [SerializeField] private int _lives = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour
         YAxisClamp();
         XWrap();
 
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > canFire)
+        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FireLaser();
         }
@@ -69,11 +71,21 @@ public class Player : MonoBehaviour
     private void FireLaser()
     {
         //add cooldown
-        canFire = Time.time + fireRate;
+        _canFire = Time.time + fireRate;
 
         //offset of laser
-        Vector3 laserOffset = new Vector3(0, laserYOffset, 0);
+        Vector3 laserOffset = new Vector3(0, _laserYOffset, 0);
 
-        Instantiate(playerLaser, transform.position + laserOffset, Quaternion.identity);
+        Instantiate(_playerLaser, transform.position + laserOffset, Quaternion.identity);
+    }
+
+    public void DamagePlayer()
+    {
+        _lives--;
+
+        if(_lives <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
