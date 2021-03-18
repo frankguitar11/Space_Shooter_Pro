@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# GameDevHQ Filebase Plugin
+[Aa]ssets/[Gg]ame[Dd]ev[Hh][Qq]/[Ff]ile[Bb]ase/[Pp]lugin/
+[Aa]ssets/[Gg]ame[Dd]ev[Hh][Qq]/[Ff]ile[Bb]ase/[Pp]lugin.meta
+
