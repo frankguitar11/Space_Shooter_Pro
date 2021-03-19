@@ -272,6 +272,10 @@ MonoBehaviour:
   _laserYOffset: 1.33
   fireRate: 0.3
   _lives: 3
+  _tripleShotActivated: 0
+  _tripleShotPrefab: {fileID: 4336881286120011671, guid: cb8a229cb6dc00c45956918e56c6b4c0,
+    type: 3}
+  _tripleShotCooldown: 5
 --- !u!50 &404646462
 Rigidbody2D:
   serializedVersion: 4
@@ -509,6 +513,8 @@ MonoBehaviour:
     type: 3}
   _enemyContainer: {fileID: 150435926}
   spawnRate: 1
+  _tripleShotPowerup: {fileID: 8971689572650664859, guid: 34484c3551a221d40bcaf677e06510db,
+    type: 3}
 --- !u!4 &1307592733
 Transform:
   m_ObjectHideFlags: 0

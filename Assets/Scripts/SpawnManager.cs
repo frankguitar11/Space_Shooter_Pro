@@ -14,10 +14,13 @@ public class SpawnManager : MonoBehaviour
     private float _ySpawn = 8f;
     public float spawnRate = 5f;
 
+    [SerializeField] private GameObject _tripleShotPowerup;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnEnemyRoutine());
+        StartCoroutine(SpawnPowerupRoutine());
     }
 
     // Update is called once per frame
@@ -26,7 +29,7 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    IEnumerator SpawnRoutine()
+    IEnumerator SpawnEnemyRoutine()
     {
         while (_isGameActive)
         {
@@ -42,5 +45,17 @@ public class SpawnManager : MonoBehaviour
     public void OnPlayerDeath()
     {
         _isGameActive = false;
+    }
+
+    IEnumerator SpawnPowerupRoutine()
+    {
+        while (_isGameActive)
+        {
+            yield return new WaitForSeconds(Random.Range(3, 8));
+
+            Vector3 spawnPos = new Vector3(Random.Range(-_xSpawnRange, _xSpawnRange), _ySpawn, 0);
+
+            Instantiate(_tripleShotPowerup, spawnPos, Quaternion.identity);     
+        }
     }
 }
