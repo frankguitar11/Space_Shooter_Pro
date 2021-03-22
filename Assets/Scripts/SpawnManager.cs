@@ -14,7 +14,9 @@ public class SpawnManager : MonoBehaviour
     private float _ySpawn = 8f;
     public float spawnRate = 5f;
 
-    [SerializeField] private GameObject _tripleShotPowerup;
+    //[SerializeField] private GameObject _tripleShotPowerup;
+
+    [SerializeField] GameObject[] powerupsArray;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +57,9 @@ public class SpawnManager : MonoBehaviour
 
             Vector3 spawnPos = new Vector3(Random.Range(-_xSpawnRange, _xSpawnRange), _ySpawn, 0);
 
-            Instantiate(_tripleShotPowerup, spawnPos, Quaternion.identity);     
+            int randomPowerup = Random.Range(0, 3);
+
+            Instantiate(powerupsArray[randomPowerup], spawnPos, Quaternion.identity);     
         }
     }
 }
