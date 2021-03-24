@@ -11,10 +11,15 @@ public class Enemy : MonoBehaviour
     private float _enemyXBounds = 9.2f;
     private int _enemyYRespawn = 8;
 
+    private Player _player;
+
+    [SerializeField] private int _enemyPointValue = 10;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -50,6 +55,13 @@ public class Enemy : MonoBehaviour
         else if(other.CompareTag("Laser"))
         {
             Destroy(other.gameObject);
+
+            if(_player != null)
+            {
+                // Adds 10 points
+                _player.AddScore(_enemyPointValue);
+            }
+
             Destroy(this.gameObject);
         }
     }
