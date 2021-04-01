@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _isShieldActive = false;
     [SerializeField] private GameObject _playerShieldVFX;
 
+    [SerializeField] private GameObject _leftEngineFailure, _rightEngineFailure;
+
     [SerializeField] private int _totalScore = 0;
     private UIManager _uiManager;
 
@@ -123,6 +125,15 @@ public class Player : MonoBehaviour
         else
         {
             _lives--;
+
+            if(_lives == 2)
+            {
+                _leftEngineFailure.SetActive(true);
+            }
+            else if(_lives == 1)
+            {
+                _rightEngineFailure.SetActive(true);
+            }
 
             _uiManager.UpdateLives(_lives);
 
