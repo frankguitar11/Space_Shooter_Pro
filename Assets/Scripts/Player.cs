@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private bool _isShieldActive = false;
     [SerializeField] private GameObject _playerShieldVFX;
+    [SerializeField] private int _shieldHealth = 3;
+    private SpriteRenderer _playerShieldColor;
 
     [SerializeField] private GameObject _leftEngineFailure, _rightEngineFailure;
 
@@ -50,6 +52,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("UI Manager is NULL");
         }
+
+        _playerShieldColor = _playerShieldVFX.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -132,7 +136,21 @@ public class Player : MonoBehaviour
     {
         if (_isShieldActive == true)
         {
-            DeactivateShield();
+            _shieldHealth--;
+
+            switch (_shieldHealth)
+            {
+                case 2:                  
+                    _playerShieldColor.color = new Color(1, 0.92f, 0.63f, 0.5f);
+                    break;
+                case 1:
+                    _playerShieldColor.color = new Color(1, 0, 0, 0.3f);
+                    break;
+                case 0:
+                    DeactivateShield();
+                    break;
+            }
+
             return;
         }
         else
@@ -187,6 +205,8 @@ public class Player : MonoBehaviour
     public void ActivateShield()
     {
         _playerShieldVFX.SetActive(true);
+        _playerShieldColor.color = Color.white;
+        _shieldHealth = 3;
         _isShieldActive = true;
     }
 
