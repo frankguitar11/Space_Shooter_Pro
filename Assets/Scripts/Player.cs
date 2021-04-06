@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _laserYOffset = 1.1f;
     public float fireRate = 0.3f;
     private float _canFire = -1f;
+    [SerializeField] private int _ammoCount = 15;
 
     [SerializeField] private int _lives = 3;
 
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
         YAxisClamp();
         XWrap();
 
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _ammoCount > 0)
         {
             FireLaser();
         }
@@ -119,6 +120,9 @@ public class Player : MonoBehaviour
 
         //offset of laser
         Vector3 laserOffset = new Vector3(0, _laserYOffset, 0);
+
+        _ammoCount--;
+        UpdateAmmoCount();
 
         if(_tripleShotActivated == true)
         {
@@ -220,5 +224,10 @@ public class Player : MonoBehaviour
     {
         _totalScore += pointsToAdd;
         _uiManager.UpdateScore(_totalScore);
+    }
+
+    public void UpdateAmmoCount()
+    {
+        _uiManager.UpdateAmmo(_ammoCount);
     }
 }
