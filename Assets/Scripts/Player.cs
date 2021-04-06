@@ -230,4 +230,10 @@ public class Player : MonoBehaviour
     {
         _uiManager.UpdateAmmo(_ammoCount);
     }
+
+    public void AddAmmo()
+    {
+        _ammoCount += 15;
+        UpdateAmmoCount();
+    }
 }
