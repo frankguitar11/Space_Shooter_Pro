@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
             //restart game, aka, reload current scene
             SceneManager.LoadScene(1);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void GameOver()

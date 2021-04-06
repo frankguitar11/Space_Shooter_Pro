@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] AudioClip _explosionSFX;
 
+    [SerializeField] private GameObject _enemyLaserPrefab;
+    private float _canFire = -1;
+    private float _fireRate;
+    private bool _isAlive = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +40,15 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Time.time > _canFire && _isAlive == true)
+        {
+            _fireRate = Random.Range(3f, 7f);
+            _canFire = Time.time + _fireRate;
+
+            GameObject enemyLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
+            enemyLaser.GetComponent<Laser>().AssignEnemyLaser();
+        }
+
         Movement();
     }
 
@@ -54,6 +68,7 @@ public class Enemy : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            _isAlive = false;
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
@@ -65,10 +80,12 @@ public class Enemy : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(_explosionSFX, Camera.main.transform.position, 1f);
 
+            Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject, 2.7f);
         }
         else if(other.CompareTag("Laser"))
         {
+            _isAlive = false;
             Destroy(other.gameObject);
 
             if(_player != null)
@@ -82,6 +99,7 @@ public class Enemy : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(_explosionSFX, Camera.main.transform.position, 1f);
 
+            Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject, 2.7f);
         }
     }

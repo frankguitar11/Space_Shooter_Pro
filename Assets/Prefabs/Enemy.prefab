@@ -50,6 +50,8 @@ MonoBehaviour:
   enemySpeed: 4.5
   _enemyPointValue: 10
   _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _enemyLaserPrefab: {fileID: 2236792069779141558, guid: 0bff2cad4fd3ded41b158f9be6fd0577,
+    type: 3}
 --- !u!212 &5233631775223138525
 SpriteRenderer:
   m_ObjectHideFlags: 0
