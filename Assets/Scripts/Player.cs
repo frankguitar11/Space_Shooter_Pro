@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int _totalScore = 0;
     private UIManager _uiManager;
 
+    [SerializeField] AudioClip _laserSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +115,8 @@ public class Player : MonoBehaviour
         {
             Instantiate(_playerLaser, transform.position + laserOffset, Quaternion.identity);
         }
+
+        AudioSource.PlayClipAtPoint(_laserSFX, Camera.main.transform.position, 1f);
     }
 
     public void DamagePlayer()

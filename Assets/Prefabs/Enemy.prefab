@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 4.5
   _enemyPointValue: 10
+  _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!212 &5233631775223138525
 SpriteRenderer:
   m_ObjectHideFlags: 0

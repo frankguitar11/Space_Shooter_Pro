@@ -11,6 +11,8 @@ public class Powerup : MonoBehaviour
     [SerializeField] private int _powerupID;
     // 0 = triple shot, 1 = speed, 2 = shields
 
+    [SerializeField] AudioClip _powerupSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,8 @@ public class Powerup : MonoBehaviour
                 }
 
             }
+
+            AudioSource.PlayClipAtPoint(_powerupSFX, Camera.main.transform.position, 1f);
 
             //destroy this
             Destroy(this.gameObject);

@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     private Animator _anim;
 
+    [SerializeField] AudioClip _explosionSFX;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +63,8 @@ public class Enemy : MonoBehaviour
             _anim.SetTrigger("OnEnemyDeath");
             enemySpeed = 0.2f;
 
+            AudioSource.PlayClipAtPoint(_explosionSFX, Camera.main.transform.position, 1f);
+
             Destroy(this.gameObject, 2.7f);
         }
         else if(other.CompareTag("Laser"))
@@ -75,6 +79,8 @@ public class Enemy : MonoBehaviour
 
             _anim.SetTrigger("OnEnemyDeath");
             enemySpeed = 0.2f;
+
+            AudioSource.PlayClipAtPoint(_explosionSFX, Camera.main.transform.position, 1f);
 
             Destroy(this.gameObject, 2.7f);
         }
