@@ -20,8 +20,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip _explosionSFX;
 
     [SerializeField] private GameObject _enemyLaserPrefab;
-    private float _canFire = -1;
-    private float _fireRate;
+    private float _canFire = -1f;
+    private float _fireRate = 3f;
     private bool _isAlive = true;
 
 
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         if(Time.time > _canFire && _isAlive == true)
         {
             _fireRate = Random.Range(3f, 7f);
-            _canFire = Time.time + _fireRate;
+            _canFire = Time.time + _fireRate;         
 
             GameObject enemyLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
             enemyLaser.GetComponent<Laser>().AssignEnemyLaser();

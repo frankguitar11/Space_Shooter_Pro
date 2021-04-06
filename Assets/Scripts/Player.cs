@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public float speed = 10f;
+    [SerializeField] private float _thrusterSpeedMultiplier = 1.2f;
 
     [SerializeField] private GameObject _playerLaser;
     [SerializeField] private float _laserYOffset = 1.1f;
@@ -71,7 +72,15 @@ public class Player : MonoBehaviour
 
         Vector3 directionInput = new Vector3(horizontalInput, verticalInput, 0);
 
-        transform.Translate(directionInput * speed * Time.deltaTime);
+        //Thruster boost
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.Translate(directionInput * (speed * _thrusterSpeedMultiplier) * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(directionInput * speed * Time.deltaTime);
+        }
     }
 
     private void YAxisClamp()
