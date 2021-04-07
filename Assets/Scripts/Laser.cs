@@ -24,6 +24,7 @@ public class Laser : MonoBehaviour
         if(_isEnemyLaser)
         {
             MoveDown();
+            speed = 7.5f;
         }
         else
         {

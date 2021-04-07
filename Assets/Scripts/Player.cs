@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserSwordVFX;
     private int _laserSwordCooldown = 5;
 
+    [SerializeField] private CameraShake _cameraShake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -196,6 +198,7 @@ public class Player : MonoBehaviour
         else
         {
             _lives--;
+            _cameraShake.MainCameraShake();
 
             if(_lives == 2)
             {
