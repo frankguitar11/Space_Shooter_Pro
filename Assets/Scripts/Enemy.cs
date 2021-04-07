@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             _isAlive = false;
+            
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
@@ -86,7 +87,12 @@ public class Enemy : MonoBehaviour
         else if(other.CompareTag("Laser"))
         {
             _isAlive = false;
-            Destroy(other.gameObject);
+            
+            Laser laser = other.transform.GetComponent<Laser>();
+            if (laser._isLaserSword == false)
+            {
+                Destroy(other.gameObject);
+            }
 
             if(_player != null)
             {

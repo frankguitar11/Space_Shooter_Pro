@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] AudioClip _laserSFX;
 
+    [SerializeField] private GameObject _laserSwordVFX;
+    private int _laserSwordCooldown = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -256,5 +259,23 @@ public class Player : MonoBehaviour
         {
             _rightEngineFailure.SetActive(false);
         }
+    }
+
+    public void ActivateLaserSword()
+    {
+        _laserSwordVFX.gameObject.SetActive(true);
+        StartCoroutine(LaserSwordCooldownRoutine());
+        
+        Laser[] laserSwordChildren = _laserSwordVFX.GetComponentsInChildren<Laser>();
+        for (int i = 0; i < laserSwordChildren.Length; i++)
+        {
+            laserSwordChildren[i].AssignLaserSword();
+        }
+    }
+
+    IEnumerator LaserSwordCooldownRoutine()
+    {
+        yield return new WaitForSeconds(_laserSwordCooldown);
+        _laserSwordVFX.gameObject.SetActive(false);
     }
 }

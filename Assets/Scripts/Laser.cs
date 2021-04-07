@@ -10,6 +10,8 @@ public class Laser : MonoBehaviour
 
     [SerializeField] private bool _isEnemyLaser = false;
 
+    public bool _isLaserSword = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,5 +76,10 @@ public class Laser : MonoBehaviour
             
             Destroy(this.gameObject);
         }
+    }
+
+    public void AssignLaserSword()
+    {
+        _isLaserSword = true;
     }
 }
