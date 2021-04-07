@@ -18,6 +18,10 @@ public class UIManager : MonoBehaviour
 
     private GameManager _gameManager;
 
+    [SerializeField] private Image _thrusterFill;
+
+    private Player _player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,12 @@ public class UIManager : MonoBehaviour
         if(_gameManager == null)
         {
             Debug.LogError("Game Manager is NULL");
+        }
+
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        if(_player == null)
+        {
+            Debug.LogError("Player is NULL in UI Manager");
         }
     }
 
@@ -75,5 +85,10 @@ public class UIManager : MonoBehaviour
             _gameOverText.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    public void UpdateThrusterFill()
+    {
+        _thrusterFill.fillAmount = Mathf.Clamp(_player.currentThrusterLevel / _player.maxThrusterFill, 0, 1f);
     }
 }

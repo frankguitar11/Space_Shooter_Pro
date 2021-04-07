@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
 
     public float speed = 10f;
     [SerializeField] private float _thrusterSpeedMultiplier = 1.2f;
+    public float maxThrusterFill = 50f;
+    public float currentThrusterLevel = 25f;
+    [SerializeField] private float _thrusterUsageAmount = 10f;
+    private bool _canUseThrusters = true;
+    private int _thrusterCooldown = 5;
 
     [SerializeField] private GameObject _playerLaser;
     [SerializeField] private float _laserYOffset = 1.1f;
@@ -71,6 +76,12 @@ public class Player : MonoBehaviour
         {
             FireLaser();
         }
+
+        if (currentThrusterLevel < maxThrusterFill)
+        {
+            currentThrusterLevel += (_thrusterUsageAmount / 3) * Time.deltaTime;
+            _uiManager.UpdateThrusterFill();
+        }
     }
 
     private void PlayerMovement()
@@ -81,14 +92,36 @@ public class Player : MonoBehaviour
         Vector3 directionInput = new Vector3(horizontalInput, verticalInput, 0);
 
         //Thruster boost
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift) && currentThrusterLevel > 0)
         {
-            transform.Translate(directionInput * (speed * _thrusterSpeedMultiplier) * Time.deltaTime);
+            if (_canUseThrusters == true)
+            {
+                transform.Translate(directionInput * (speed * _thrusterSpeedMultiplier) * Time.deltaTime);
+                currentThrusterLevel -= _thrusterUsageAmount * Time.deltaTime;
+                _uiManager.UpdateThrusterFill();
+            }
+            else
+            {
+                transform.Translate(directionInput * speed * Time.deltaTime);
+                return;
+            }
+                 
+        }
+        else if(Input.GetKey(KeyCode.LeftShift) && currentThrusterLevel <= 0)
+        {
+            StartCoroutine(PlayerThrusterCooldownRoutine());
         }
         else
         {
             transform.Translate(directionInput * speed * Time.deltaTime);
         }
+    }
+
+    IEnumerator PlayerThrusterCooldownRoutine()
+    {
+        _canUseThrusters = false;
+        yield return new WaitForSeconds(_thrusterCooldown);
+        _canUseThrusters = true;
     }
 
     private void YAxisClamp()
