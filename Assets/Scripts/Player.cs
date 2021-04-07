@@ -236,4 +236,25 @@ public class Player : MonoBehaviour
         _ammoCount += 15;
         UpdateAmmoCount();
     }
+
+    public void Plus1Health()
+    {
+        if (_lives == 3)
+        {
+            Debug.Log("Lives at MAX");
+            return;
+        }
+
+        _lives++;
+        _uiManager.UpdateLives(_lives);
+
+        if (_lives == 3)
+        {
+            _leftEngineFailure.SetActive(false);
+        }
+        else if (_lives == 2)
+        {
+            _rightEngineFailure.SetActive(false);
+        }
+    }
 }
