@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateAmmo(int totalAmmo)
     {
-        _ammoText.text = "Ammo: " + totalAmmo;
+        _ammoText.text = "Ammo: " + totalAmmo + "/30";
     }
 
     public void GameOverScreen()

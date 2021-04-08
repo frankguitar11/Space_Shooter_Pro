@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public float fireRate = 0.3f;
     private float _canFire = -1f;
     [SerializeField] private int _ammoCount = 15;
+    private int _maxAmmo = 30;
 
     [SerializeField] private int _lives = 3;
 
@@ -273,6 +274,11 @@ public class Player : MonoBehaviour
     public void AddAmmo()
     {
         _ammoCount += 15;
+        if(_ammoCount > _maxAmmo)
+        {
+            _ammoCount = _maxAmmo;
+        }
+
         UpdateAmmoCount();
     }
 

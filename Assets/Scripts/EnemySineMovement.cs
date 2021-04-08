@@ -35,6 +35,7 @@ public class EnemySineMovement : MonoBehaviour
 
         transform.position += (vSin + vLin) * Time.deltaTime;
 
-        Debug.DrawLine(vLastPos, transform.position, Color.green, 100);
+        //Line visualization
+        //Debug.DrawLine(vLastPos, transform.position, Color.green, 100);
     }
 }
