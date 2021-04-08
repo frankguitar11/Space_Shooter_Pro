@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     private float _fireRate = 3f;
     private bool _isAlive = true;
 
+    [SerializeField] private EnemySineMovement _sineMovement;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +56,7 @@ public class Enemy : MonoBehaviour
 
     private void Movement()
     {
-        transform.Translate(Vector3.down * enemySpeed * Time.deltaTime);
+        transform.Translate(new Vector3(0, -1, 0) * enemySpeed * Time.deltaTime);
 
         if (transform.position.y < _enemyYBounds)
         {
@@ -69,6 +71,8 @@ public class Enemy : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             _isAlive = false;
+
+            _sineMovement.GetComponent<EnemySineMovement>().enabled = false;
             
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
@@ -87,7 +91,9 @@ public class Enemy : MonoBehaviour
         else if(other.CompareTag("Laser"))
         {
             _isAlive = false;
-            
+
+            _sineMovement.GetComponent<EnemySineMovement>().enabled = false;
+
             Laser laser = other.transform.GetComponent<Laser>();
             if (laser._isLaserSword == false)
             {

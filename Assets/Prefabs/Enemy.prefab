@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2784046543048902723}
   - component: {fileID: 4659189938953612867}
   - component: {fileID: 5974101927948134709}
+  - component: {fileID: 476157312}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -52,6 +53,7 @@ MonoBehaviour:
   _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _enemyLaserPrefab: {fileID: 2236792069779141558, guid: 0bff2cad4fd3ded41b158f9be6fd0577,
     type: 3}
+  _sineMovement: {fileID: 476157312}
 --- !u!212 &5233631775223138525
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -168,3 +170,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &476157312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7211349838657605518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe93c42ff320b8541a05576280e0ce9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurveSpeed: 5
+  MoveSpeed: 0.1
+  _curveRadius: 3
