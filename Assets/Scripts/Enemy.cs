@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private EnemySineMovement _sineMovement;
 
+    private SpawnManager _spawnManager;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,8 @@ public class Enemy : MonoBehaviour
         }
 
         _anim = GetComponent<Animator>();
+
+        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -85,7 +88,9 @@ public class Enemy : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(_explosionSFX, Camera.main.transform.position, 1f);
 
+            _spawnManager.EnemyKilled();
             Destroy(GetComponent<Collider2D>());
+
             Destroy(this.gameObject, 2.7f);
         }
         else if(other.CompareTag("Laser"))
@@ -112,6 +117,8 @@ public class Enemy : MonoBehaviour
             AudioSource.PlayClipAtPoint(_explosionSFX, Camera.main.transform.position, 1f);
 
             Destroy(GetComponent<Collider2D>());
+            _spawnManager.EnemyKilled();
+
             Destroy(this.gameObject, 2.7f);
         }
     }

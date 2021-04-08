@@ -22,23 +22,33 @@ public class UIManager : MonoBehaviour
 
     private Player _player;
 
+    [SerializeField] private Text _waveText;
+
+    private SpawnManager _spawnManager;
+
     // Start is called before the first frame update
     void Start()
     {
         //initialize score
         _scoreText.text = "Score: " + 0;
-        _ammoText.text = "Ammo: " + 15;
+        _ammoText.text = "Ammo: " + 15 + "/30";
 
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         if(_gameManager == null)
         {
-            Debug.LogError("Game Manager is NULL");
+            Debug.LogError("Game Manager is NULL in UI Manager");
         }
 
         _player = GameObject.Find("Player").GetComponent<Player>();
         if(_player == null)
         {
             Debug.LogError("Player is NULL in UI Manager");
+        }
+
+        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        if(_spawnManager == null)
+        {
+            Debug.LogError("Spawn Manager is NULL in UI Manager");
         }
     }
 
@@ -90,5 +100,22 @@ public class UIManager : MonoBehaviour
     public void UpdateThrusterFill()
     {
         _thrusterFill.fillAmount = Mathf.Clamp(_player.currentThrusterLevel / _player.maxThrusterFill, 0, 1f);
+    }
+
+    public void SpawnNextWave()
+    {
+        StartCoroutine(WaveTextEnableRoutine());
+    }
+
+    IEnumerator WaveTextEnableRoutine()
+    {
+        _waveText.text = "Wave " + _spawnManager.GetWaveNumber();
+        _waveText.gameObject.SetActive(true);
+        _spawnManager.EnableNextWaveSpawning();
+
+        yield return new WaitForSeconds(3f);
+
+        _waveText.gameObject.SetActive(false);
+
     }
 }
