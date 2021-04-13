@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
 
     private float _xSpawnRange = 9.2f;
     private float _ySpawn = 8f;
-    public float spawnRate = 5f;
+    public float spawnRate = 2f;
 
     [SerializeField] GameObject[] powerupsArray;
 
@@ -83,6 +83,14 @@ public class SpawnManager : MonoBehaviour
 
     public void StartEnemySpawning()
     {
+        if (_waveNumber % 2 == 0)
+        {
+            spawnRate -= 0.2f;
+            if(spawnRate <= 0.4f)
+            {
+                spawnRate = 0.4f;
+            }
+        }
         StartCoroutine(SpawnEnemyRoutine());
     }
 

@@ -48,6 +48,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private CameraShake _cameraShake;
 
+    [SerializeField] private GameObject _freezeVFX;
+    [SerializeField] private GameObject _thrusterVFX;
+    [SerializeField] private Animator _freezeVFXAnimator;
+    [SerializeField] private float _freezeCooldown = 3f;
+    private float _ogSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -319,5 +325,26 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_laserSwordCooldown);
         _laserSwordVFX.gameObject.SetActive(false);
+    }
+
+    public void FreezeVFXActivate()
+    {
+        _ogSpeed = speed;
+
+        speed /= speed;
+        _freezeVFX.SetActive(true);
+        _thrusterVFX.SetActive(false);
+        _freezeVFXAnimator.SetBool("Player_Frozen", true);
+
+        StartCoroutine(FreezeCooldownRoutine());
+    }
+
+    IEnumerator FreezeCooldownRoutine()
+    {
+        yield return new WaitForSeconds(_freezeCooldown);
+        speed *= _ogSpeed;
+        _freezeVFXAnimator.SetBool("Player_Frozen", false);
+        _thrusterVFX.SetActive(true);
+        _freezeVFX.SetActive(false);
     }
 }
