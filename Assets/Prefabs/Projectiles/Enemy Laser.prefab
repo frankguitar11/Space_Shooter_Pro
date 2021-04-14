@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 100906045305144568}
   m_Layer: 0
   m_Name: Enemy Laser
-  m_TagString: Untagged
+  m_TagString: Enemy Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5.5
   _isEnemyLaser: 0
+  _isDoubleSidedLaser: 0
   _isLaserSword: 0
 --- !u!61 &100906045305144568
 BoxCollider2D:
