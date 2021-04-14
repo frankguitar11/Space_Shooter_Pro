@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bombSpeed: 2
   _rotatationSpeed: 35
-  _bombExplosionVFX: {fileID: 9210880874642839417, guid: f52257c63c2491e40860d8797c402950,
+  _bombExplosionVFX: {fileID: 9210880874642839417, guid: f555147e31a7c0e4c84c37f159e6e648,
     type: 3}
   _explodeInSeconds: 2.5
 --- !u!95 &3880561771463335044

@@ -101,7 +101,7 @@ MonoBehaviour:
   enemySpeed: 3
   _enemyPointValue: 20
   _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
-  _kamikazeeBombPrefab: {fileID: 7652456976687222352, guid: dace11da7356b5e47b348815ed5b9764,
+  _kamikazeeBombPrefab: {fileID: 7652456976687222352, guid: 9b893f584d406f449a571044a2fa089a,
     type: 3}
   _enemyDamageVFX: {fileID: 528091628795740335}
 --- !u!50 &528091628243724936

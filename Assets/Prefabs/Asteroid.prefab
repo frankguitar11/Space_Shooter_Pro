@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 20
-  _explosionVFX: {fileID: 7857183828191104621, guid: bf68d6b40735e704b8069f85e75f8b7e,
+  _explosionVFX: {fileID: 7857183828191104621, guid: ee47c301146f7a7458519f7f6709c7e9,
     type: 3}
