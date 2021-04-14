@@ -28,6 +28,9 @@ public class Enemy : MonoBehaviour
 
     private SpawnManager _spawnManager;
 
+    [SerializeField] private GameObject _enemyShield;
+    [SerializeField] private bool _hasShield;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,8 @@ public class Enemy : MonoBehaviour
         _anim = GetComponent<Animator>();
 
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+
+        RandomShieldEnemy();
     }
 
     // Update is called once per frame
@@ -73,15 +78,20 @@ public class Enemy : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            //check for shields
+            if (_hasShield == true)
+            {
+                _enemyShield.gameObject.SetActive(false);
+                _player.DamagePlayer();
+                _hasShield = false;
+                return;
+            }
+
             _isAlive = false;
 
             _sineMovement.GetComponent<EnemySineMovement>().enabled = false;
             
-            Player player = other.transform.GetComponent<Player>();
-            if (player != null)
-            {
-                player.DamagePlayer();
-            }
+            _player.DamagePlayer();
 
             _anim.SetTrigger("OnEnemyDeath");
             enemySpeed = 0.2f;
@@ -95,6 +105,19 @@ public class Enemy : MonoBehaviour
         }
         else if(other.CompareTag("Laser"))
         {
+            //check for shields
+            if (_hasShield == true)
+            {
+                _enemyShield.gameObject.SetActive(false);
+                Laser laserSwordCheck = other.GetComponent<Laser>();
+                if (laserSwordCheck._isLaserSword == false)
+                {
+                    Destroy(other.gameObject);
+                }
+                _hasShield = false;
+                return;
+            }
+
             _isAlive = false;
 
             _sineMovement.GetComponent<EnemySineMovement>().enabled = false;
@@ -120,6 +143,22 @@ public class Enemy : MonoBehaviour
             _spawnManager.EnemyKilled();
 
             Destroy(this.gameObject, 2.7f);
+        }
+    }
+
+    private void RandomShieldEnemy()
+    {
+        int randomShieldNumber = Random.Range(0, 2);
+
+        if(randomShieldNumber == 0)
+        {
+            _hasShield = true;
+            _enemyShield.gameObject.SetActive(true);
+        }
+        else if(randomShieldNumber == 1)
+        {
+            _hasShield = false;
+            _enemyShield.gameObject.SetActive(false);
         }
     }
 }

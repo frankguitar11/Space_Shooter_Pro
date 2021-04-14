@@ -511,7 +511,7 @@ MonoBehaviour:
   _ammoCount: 15
   _lives: 3
   _tripleShotActivated: 0
-  _tripleShotPrefab: {fileID: 4336881286120011671, guid: 00ca51e6783ac7c46b6cad4372554e3e,
+  _tripleShotPrefab: {fileID: 6113077365599757424, guid: ff2a181857a2e1c4db64c5247bbfae99,
     type: 3}
   _tripleShotCooldown: 5
   _speedMultiplier: 2
@@ -522,8 +522,7 @@ MonoBehaviour:
   _rightEngineFailure: {fileID: 1558759715}
   _totalScore: 0
   _laserSFX: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
-  _laserSwordVFX: {fileID: 3381342269616424230, guid: f6d29657016a5194e8a04dd90e74a34e,
-    type: 3}
+  _laserSwordVFX: {fileID: 1739787869}
   _cameraShake: {fileID: 361688925}
   _freezeVFX: {fileID: 1504807134}
   _thrusterVFX: {fileID: 1697960669}
@@ -634,7 +633,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404646460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: -2.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 729462540}
@@ -1973,6 +1972,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1739787869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3381342269616424230, guid: f6d29657016a5194e8a04dd90e74a34e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3579916426634734733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1804530847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,6 +2339,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid
       objectReference: {fileID: 0}
+    - target: {fileID: 968332798447252646, guid: 36f7cdaec3698b34fb0efafe71839395,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 968332798447252653, guid: 36f7cdaec3698b34fb0efafe71839395,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2402,11 +2412,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Laser_Sword
-      objectReference: {fileID: 0}
-    - target: {fileID: 3381342269616424230, guid: f6d29657016a5194e8a04dd90e74a34e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3381342269616424231, guid: f6d29657016a5194e8a04dd90e74a34e,
         type: 3}
