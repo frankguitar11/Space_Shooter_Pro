@@ -77,6 +77,19 @@ public class Laser : MonoBehaviour
             
             Destroy(this.gameObject);
         }
+        
+        if(collision.tag == "Enemy Bomb")
+        {
+            collision.GetComponent<EnemyBomb>().BombExplosion();
+            Destroy(collision.gameObject);
+
+            Destroy(this.gameObject);
+        }
+        else if(collision.tag == "Enemy Bomb" && _isLaserSword)
+        {
+            collision.GetComponent<EnemyBomb>().BombExplosion();
+            Destroy(collision.gameObject);
+        }
     }
 
     public void AssignLaserSword()

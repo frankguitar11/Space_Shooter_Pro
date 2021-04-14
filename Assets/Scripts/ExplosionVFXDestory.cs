@@ -15,4 +15,17 @@ public class ExplosionVFXDestory : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(this.CompareTag("Enemy Bomb Explosion") && collision.CompareTag("Player"))
+        {
+            Player _player = collision.GetComponent<Player>();
+
+            _player.DamagePlayer();
+            _player.DamagePlayer();
+
+            Destroy(GetComponent<CircleCollider2D>());
+        }
+    }
 }

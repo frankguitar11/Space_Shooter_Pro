@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private bool _isGameActive = true;
     [SerializeField] private bool _spawnEnemyWave = true;
 
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject[] _enemyPrefabsArray;
     [SerializeField] private GameObject _enemyContainer;
 
     private float _xSpawnRange = 9.2f;
@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
         {
                 for (int i = 0; i < _enemiesInCurrentWave; i++)
                 {
-                    GameObject newEnemy = Instantiate(_enemyPrefab,
+                    GameObject newEnemy = Instantiate(_enemyPrefabsArray[Random.Range(0, _enemyPrefabsArray.Length)],
                                 new Vector3(Random.Range(-_xSpawnRange, _xSpawnRange), _ySpawn, 0), Quaternion.identity);
 
                     newEnemy.transform.parent = _enemyContainer.transform;
