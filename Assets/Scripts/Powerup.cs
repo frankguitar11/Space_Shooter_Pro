@@ -13,10 +13,16 @@ public class Powerup : MonoBehaviour
 
     [SerializeField] AudioClip _powerupSFX;
 
+    private Player _player;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        if(_player == null)
+        {
+            Debug.LogError("Player is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -30,6 +36,8 @@ public class Powerup : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        PowerupMagnet();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -76,6 +84,14 @@ public class Powerup : MonoBehaviour
         else if(collision.tag == "Enemy Laser")
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    private void PowerupMagnet()
+    {
+        if(Input.GetKey(KeyCode.C))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, (_speed * 2) * Time.deltaTime);
         }
     }
 }

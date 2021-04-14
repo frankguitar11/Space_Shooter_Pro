@@ -42,6 +42,12 @@ public class SpawnManager : MonoBehaviour
             _uiManager.SpawnNextWave();
             StartEnemySpawning();
         }
+
+        if(_isGameActive == false)
+        {
+            StopCoroutine(SpawnPowerupRoutine());
+            StopCoroutine(SpawnEnemyRoutine());
+        }
     }
 
     public void StartGameSpawning()
