@@ -9,6 +9,7 @@ public class Laser : MonoBehaviour
     private float outOfBounds = 8.2f;
 
     [SerializeField] private bool _isEnemyLaser = false;
+    [SerializeField] private bool _isDoubleSidedLaser = false;
 
     public bool _isLaserSword = false;
 
@@ -21,7 +22,11 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_isEnemyLaser)
+        if(_isEnemyLaser && _isDoubleSidedLaser)
+        {
+            MoveUp();
+        }
+        else if(_isEnemyLaser && _isDoubleSidedLaser == false)
         {
             MoveDown();
             speed = 7.5f;
@@ -67,6 +72,11 @@ public class Laser : MonoBehaviour
     public void AssignEnemyLaser()
     {
         _isEnemyLaser = true;
+    }
+
+    public void AssignDoubleSidedLaser()
+    {
+        _isDoubleSidedLaser = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

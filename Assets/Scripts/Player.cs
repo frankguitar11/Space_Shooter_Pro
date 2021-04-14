@@ -215,15 +215,16 @@ public class Player : MonoBehaviour
             {
                 _rightEngineFailure.SetActive(true);
             }
-
-            _uiManager.UpdateLives(_lives);
-
-            if (_lives <= 0)
+            else if(_lives <= 0)
             {
+                _lives = 0;
                 _spawnManager.OnPlayerDeath();
 
                 Destroy(this.gameObject);
             }
+
+            _uiManager.UpdateLives(_lives);
+
         }
     }
 

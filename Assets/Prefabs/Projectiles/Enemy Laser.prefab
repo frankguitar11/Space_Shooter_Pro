@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5.5
-  _isEnemyLaser: 1
+  _isEnemyLaser: 0
   _isLaserSword: 0
 --- !u!61 &100906045305144568
 BoxCollider2D:
