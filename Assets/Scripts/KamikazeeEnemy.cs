@@ -51,7 +51,10 @@ public class KamikazeeEnemy : MonoBehaviour
 
             Vector3 bombOffset = new Vector3(0, 1.4f, 0);
 
-            GameObject enemyLaser = Instantiate(_kamikazeeBombPrefab, transform.position + bombOffset, Quaternion.identity);
+            if (_spawnManager.IsGameActive() == true)
+            {
+                GameObject enemyBomb = Instantiate(_kamikazeeBombPrefab, transform.position + bombOffset, Quaternion.identity);
+            }
         }
 
         Movement();
@@ -71,18 +74,21 @@ public class KamikazeeEnemy : MonoBehaviour
 
         if (_isAlive != false)
         {
-            //Follow player
-            if (Vector3.Distance(transform.position, _player.transform.position) != 0 && _player != null)
+            if (_player != null)
             {
-                //move towards
-                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, enemySpeed / 2 * Time.deltaTime);
+                //Follow player
+                if (Vector3.Distance(transform.position, _player.transform.position) != 0)
+                {
+                    //move towards
+                    transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, enemySpeed / 2 * Time.deltaTime);
 
-                //Rotate towards
-                Vector2 direction = (_player.transform.position - transform.position).normalized;
-                var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                var offset = 90f;
+                    //Rotate towards
+                    Vector2 direction = (_player.transform.position - transform.position).normalized;
+                    var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    var offset = 90f;
 
-                transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+                    transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+                }
             }
         }
     }

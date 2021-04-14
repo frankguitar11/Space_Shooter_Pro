@@ -104,6 +104,11 @@ public class SpawnManager : MonoBehaviour
         _isGameActive = false;
     }
 
+    public bool IsGameActive()
+    {
+        return _isGameActive;
+    }
+
     IEnumerator SpawnPowerupRoutine()
     {
         yield return new WaitForSeconds(3f);

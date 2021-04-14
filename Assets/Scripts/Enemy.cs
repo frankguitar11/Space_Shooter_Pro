@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _enemyShield;
     [SerializeField] private bool _hasShield;
 
+    [SerializeField] private float _rammingDistance = 1.5f;
+    private SpriteRenderer _spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,8 @@ public class Enemy : MonoBehaviour
         _anim = GetComponent<Animator>();
 
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         RandomShieldEnemy();
     }
@@ -59,7 +64,7 @@ public class Enemy : MonoBehaviour
             enemyLaser.GetComponent<Laser>().AssignEnemyLaser();
         }
 
-        Movement();
+        EnemyAggression();
     }
 
     private void Movement()
@@ -160,5 +165,35 @@ public class Enemy : MonoBehaviour
             _hasShield = false;
             _enemyShield.gameObject.SetActive(false);
         }
+    }
+
+    private void EnemyAggression()
+    {
+        if (_player != null)
+        {
+            if (Vector3.Distance(transform.position, _player.transform.position) <= _rammingDistance)
+            {
+                _spriteRenderer.color = Color.red;
+
+                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position,
+                                                          (enemySpeed / 2) * Time.deltaTime);
+            }
+
+            else if (Vector3.Distance(transform.position, _player.transform.position) > _rammingDistance)
+            {
+                _spriteRenderer.color = Color.white;
+                Movement();
+            }
+        }
+        else if (_player == null)
+        {
+            Movement();
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _rammingDistance);
     }
 }
