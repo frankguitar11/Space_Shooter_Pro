@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     private float _fireRate = 3f;
     private bool _isAlive = true;
 
+    [SerializeField] GameObject _enemyExplosionVFX;
+
     [SerializeField] private EnemySineMovement _sineMovement;
 
     private SpawnManager _spawnManager;
@@ -60,7 +62,7 @@ public class Enemy : MonoBehaviour
         {
             _fireRate = Random.Range(3f, 7f);
             _canFire = Time.time + _fireRate;         
-
+           
             GameObject enemyLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
             enemyLaser.GetComponent<Laser>().AssignEnemyLaser();
         }
@@ -153,6 +155,28 @@ public class Enemy : MonoBehaviour
             _spawnManager.EnemyKilled();
 
             Destroy(this.gameObject, 2.7f);
+        }
+        else if(other.CompareTag("Missle"))
+        {
+            _isAlive = false;
+
+            _sineMovement.GetComponent<EnemySineMovement>().enabled = false;
+
+            if(_player != null)
+            {
+                _player.AddScore(_enemyPointValue);
+            }
+
+            Instantiate(_enemyExplosionVFX, transform.position, Quaternion.identity);
+            enemySpeed = 0.2f;
+
+            Destroy(GetComponent<Collider2D>());
+            _spawnManager.EnemyKilled();
+
+            Destroy(other.gameObject);
+
+            Destroy(this.gameObject);
+
         }
     }
 

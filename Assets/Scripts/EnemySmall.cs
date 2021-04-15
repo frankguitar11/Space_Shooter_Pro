@@ -121,6 +121,28 @@ public class EnemySmall : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+        else if (other.CompareTag("Missle"))
+        {
+            _isAlive = false;
+
+            _sineMovement.GetComponent<EnemySineMovement>().enabled = false;
+
+            if (_player != null)
+            {
+                _player.AddScore(_enemyPointValue);
+            }
+
+            Instantiate(_explosionVFX, transform.position, Quaternion.identity);
+            enemySpeed = 0.2f;
+
+            Destroy(GetComponent<Collider2D>());
+            _spawnManager.EnemyKilled();
+
+            Destroy(other.gameObject);
+
+            Destroy(this.gameObject);
+
+        }
     }
 
 
@@ -128,31 +150,27 @@ public class EnemySmall : MonoBehaviour
     {
         Vector3 laserPosition = new Vector3(0,0,0);
 
-        foreach(GameObject laser in _player.playerLasers)
+        if (_player.playerLasers.Count != 0)
         {
-            laserPosition = laser.transform.position;
-            if(_player.playerLasers == null)
+            foreach (GameObject laser in _player.playerLasers)
             {
-                return;
+                laserPosition = laser.transform.position;
             }
-        }
 
-        if(Vector3.Distance(transform.position, laserPosition) <= _safetyDistance)
-        {
-            //laser approaches from the right
-            if(laserPosition.x > transform.position.x)
+            if (Vector3.Distance(transform.position, laserPosition) <= _safetyDistance)
             {
-                transform.Translate(Vector3.left * _dodgeSpeed * Time.deltaTime);
-            }
-            //laser approaches from left
-            else if(laserPosition.x < transform.position.x)
-            {
-                transform.Translate(Vector3.right * _dodgeSpeed * Time.deltaTime);
+                //laser approaches from the right
+                if (laserPosition.x > transform.position.x)
+                {
+                    transform.Translate(Vector3.left * _dodgeSpeed * Time.deltaTime);
+                }
+                //laser approaches from left
+                else if (laserPosition.x < transform.position.x)
+                {
+                    transform.Translate(Vector3.right * _dodgeSpeed * Time.deltaTime);
+                }
             }
         }
-        //if player laser < safe distance
-        //try to dodge
-        //  - move to the left, or right
     }
 
     private void OnDrawGizmosSelected()

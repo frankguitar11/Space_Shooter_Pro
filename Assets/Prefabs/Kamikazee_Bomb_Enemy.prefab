@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 3
   _enemyPointValue: 20
+  _explosionVFX: {fileID: 7857183828191104621, guid: ee47c301146f7a7458519f7f6709c7e9,
+    type: 3}
   _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _kamikazeeBombPrefab: {fileID: 7652456976687222352, guid: 9b893f584d406f449a571044a2fa089a,
     type: 3}

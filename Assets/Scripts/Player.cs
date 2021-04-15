@@ -58,6 +58,10 @@ public class Player : MonoBehaviour
 
     public List<GameObject> playerLasers = new List<GameObject>();
 
+    [SerializeField] private bool _homingMissleActive;
+    [SerializeField] private float _homingMissleCooldown = 3f;
+    [SerializeField] GameObject _homingMisslePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -178,11 +182,23 @@ public class Player : MonoBehaviour
             GameObject tripleLaser = Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
             playerLasers.Add(tripleLaser);
         }
-        else
+        if (_homingMissleActive == true)
+        {
+            GameObject homingMissle = Instantiate(_homingMisslePrefab, transform.position, Quaternion.identity);
+            playerLasers.Add(homingMissle);
+        }
+        if(_tripleShotActivated == true && _homingMissleActive == true)
+        {
+            GameObject homingMissle = Instantiate(_homingMisslePrefab, transform.position, Quaternion.identity);
+            playerLasers.Add(homingMissle);
+        }
+        else if (_tripleShotActivated == false && _homingMissleActive == false)
         {
             GameObject singleLaser = Instantiate(_playerLaser, transform.position + laserOffset, Quaternion.identity);
             playerLasers.Add(singleLaser);
         }
+
+
 
         AudioSource.PlayClipAtPoint(_laserSFX, Camera.main.transform.position, 1f);
     }
@@ -355,5 +371,18 @@ public class Player : MonoBehaviour
         _freezeVFXAnimator.SetBool("Player_Frozen", false);
         _thrusterVFX.SetActive(true);
         _freezeVFX.SetActive(false);
+    }
+
+    public void ActivateHomingMissle()
+    {
+        _homingMissleActive = true;
+        StartCoroutine(HomingMissleCooldownRoutine());
+    }
+
+    IEnumerator HomingMissleCooldownRoutine()
+    {
+        yield return new WaitForSeconds(_homingMissleCooldown);
+
+        _homingMissleActive = false;
     }
 }

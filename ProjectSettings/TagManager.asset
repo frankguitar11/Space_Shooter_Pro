@@ -9,6 +9,7 @@ TagManager:
   - Enemy Bomb
   - Enemy Bomb Explosion
   - Enemy Laser
+  - Missle
   layers:
   - Default
   - TransparentFX

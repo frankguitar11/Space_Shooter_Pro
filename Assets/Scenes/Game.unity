@@ -531,6 +531,10 @@ MonoBehaviour:
   _freezeVFXAnimator: {fileID: 1504807136}
   _freezeCooldown: 3
   playerLasers: []
+  _homingMissleActive: 0
+  _homingMissleCooldown: 3
+  _homingMisslePrefab: {fileID: 612166599201009456, guid: 0ee99ff5e4736464691efea49d445d0e,
+    type: 3}
 --- !u!50 &404646462
 Rigidbody2D:
   serializedVersion: 4
@@ -636,7 +640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404646460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.68, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 729462540}
@@ -1312,13 +1316,14 @@ MonoBehaviour:
   powerupsArray:
   - {fileID: 4655558400128370445, guid: c7560e20deab21b469cdfcab62eb96cf, type: 3}
   - {fileID: 4655558400128370445, guid: c7560e20deab21b469cdfcab62eb96cf, type: 3}
+  - {fileID: 8971689572650664859, guid: 4ffcb47b39a32064d9edb8dde8ce2fc1, type: 3}
   - {fileID: 474245630712947922, guid: 0ff274092d57e2a45b161f9c0e1e7eb3, type: 3}
-  - {fileID: 8971689572650664859, guid: 4ffcb47b39a32064d9edb8dde8ce2fc1, type: 3}
-  - {fileID: 8002379117563062312, guid: dbeb56c1dc92ae44a9e0ffd47e668aa3, type: 3}
+  - {fileID: 2626336717800307764, guid: 112e800a5011cb64fa7cd8596f6f5e62, type: 3}
   - {fileID: 3099195413417477007, guid: f4f835dd0505fc245bbdc2553625e460, type: 3}
+  - {fileID: 8002379117563062312, guid: dbeb56c1dc92ae44a9e0ffd47e668aa3, type: 3}
+  - {fileID: 7741882938074879375, guid: 062628ec27ae0404fbb5324646aeca34, type: 3}
   - {fileID: 8971689572650664859, guid: 4ffcb47b39a32064d9edb8dde8ce2fc1, type: 3}
-  - {fileID: 7741882938074879375, guid: 062628ec27ae0404fbb5324646aeca34, type: 3}
-  - {fileID: 7741882938074879375, guid: 062628ec27ae0404fbb5324646aeca34, type: 3}
+  - {fileID: 4655558400128370445, guid: c7560e20deab21b469cdfcab62eb96cf, type: 3}
   _currentEnemies: 0
   _enemiesInCurrentWave: 15
   _waveNumber: 1

@@ -9,7 +9,8 @@ public class Powerup : MonoBehaviour
     private float offScreenY = -5.7f;
 
     [SerializeField] private int _powerupID;
-    // 0 = triple shot, 1 = speed, 2 = shields, 3 = ammo, 4 = health +1, 5 = Laser Sword
+    // 0 = triple shot, 1 = speed, 2 = shields, 
+    // 3 = ammo, 4 = health +1, 5 = Laser Sword, 6 = Homing Missle
 
     [SerializeField] AudioClip _powerupSFX;
 
@@ -68,6 +69,9 @@ public class Powerup : MonoBehaviour
                     case 5:
                         player.ActivateLaserSword();
                             break;
+                    case 6:
+                        player.ActivateHomingMissle();
+                        break;
                     default:
                         Debug.Log("Defaulted value of _powerupID");
                         break;

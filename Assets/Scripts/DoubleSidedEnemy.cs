@@ -155,6 +155,26 @@ public class DoubleSidedEnemy : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+        else if (other.CompareTag("Missle"))
+        {
+            _isAlive = false;
+
+            if (_player != null)
+            {
+                _player.AddScore(_enemyPointValue);
+            }
+
+            Instantiate(_explosionVFX, transform.position, Quaternion.identity);
+            enemySpeed = 0.2f;
+
+            Destroy(GetComponent<Collider2D>());
+            _spawnManager.EnemyKilled();
+
+            Destroy(other.gameObject);
+
+            Destroy(this.gameObject);
+
+        }
     }
 
     private void EnemyAggression()

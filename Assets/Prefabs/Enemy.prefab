@@ -54,6 +54,8 @@ MonoBehaviour:
   _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _enemyLaserPrefab: {fileID: 2236792069779141558, guid: 232bc31ed5a2724499b60ee7c6cbdf24,
     type: 3}
+  _enemyExplosionVFX: {fileID: 7857183828191104621, guid: ee47c301146f7a7458519f7f6709c7e9,
+    type: 3}
   _sineMovement: {fileID: 476157312}
   _enemyShield: {fileID: 2068507091}
   _hasShield: 0

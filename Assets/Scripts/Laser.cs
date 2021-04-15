@@ -14,14 +14,23 @@ public class Laser : MonoBehaviour
     public bool _isLaserSword = false;
 
     private Player _player;
+    private SpawnManager _spawnManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
-        if(_player == null)
+        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        if(_spawnManager == null)
         {
-            Debug.LogError("Player is NULL");
+            Debug.LogError("Spawn Manager is NULL");
+        }
+        if (_spawnManager.IsGameActive() == true)
+        {
+            _player = GameObject.Find("Player").GetComponent<Player>();
+            if (_player == null)
+            {
+                Debug.LogError("Player is NULL");
+            }
         }
     }
 

@@ -16,6 +16,7 @@ public class KamikazeeEnemy : MonoBehaviour
     [SerializeField] private int _enemyPointValue = 20;
 
     private Animator _anim;
+    [SerializeField] GameObject _explosionVFX;
 
     [SerializeField] AudioClip _explosionSFX;
 
@@ -80,7 +81,8 @@ public class KamikazeeEnemy : MonoBehaviour
                 if (Vector3.Distance(transform.position, _player.transform.position) != 0)
                 {
                     //move towards
-                    transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, enemySpeed / 2 * Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, 
+                                            enemySpeed / 2 * Time.deltaTime);
 
                     //Rotate towards
                     Vector2 direction = (_player.transform.position - transform.position).normalized;
@@ -145,6 +147,26 @@ public class KamikazeeEnemy : MonoBehaviour
             _enemyDamageVFX.SetActive(false);
 
             Destroy(this.gameObject, 2.7f);
+        }
+        else if (other.CompareTag("Missle"))
+        {
+            _isAlive = false;
+
+            if (_player != null)
+            {
+                _player.AddScore(_enemyPointValue);
+            }
+
+            Instantiate(_explosionVFX, transform.position, Quaternion.identity);
+            enemySpeed = 0.2f;
+
+            Destroy(GetComponent<Collider2D>());
+            _spawnManager.EnemyKilled();
+
+            Destroy(other.gameObject);
+
+            Destroy(this.gameObject);
+
         }
     }
 
