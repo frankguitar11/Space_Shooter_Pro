@@ -13,10 +13,16 @@ public class Laser : MonoBehaviour
 
     public bool _isLaserSword = false;
 
+    private Player _player;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        if(_player == null)
+        {
+            Debug.LogError("Player is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -48,6 +54,8 @@ public class Laser : MonoBehaviour
             {
                 Destroy(transform.parent.gameObject);
             }
+
+            _player.playerLasers.Remove(this.gameObject);
 
             Destroy(this.gameObject);
         }
@@ -93,6 +101,7 @@ public class Laser : MonoBehaviour
             collision.GetComponent<EnemyBomb>().BombExplosion();
             Destroy(collision.gameObject);
 
+            _player.playerLasers.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
         else if(collision.tag == "Enemy Bomb" && _isLaserSword)

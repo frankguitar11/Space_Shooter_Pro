@@ -36,6 +36,7 @@ public class FreezeAsteroid : MonoBehaviour
             GameObject explosion = Instantiate(_explosionVFX, transform.position, Quaternion.identity);
             explosion.transform.localScale /= 2;
 
+            _player.playerLasers.Remove(collision.gameObject);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
         }

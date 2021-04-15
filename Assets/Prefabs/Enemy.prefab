@@ -58,6 +58,7 @@ MonoBehaviour:
   _enemyShield: {fileID: 2068507091}
   _hasShield: 0
   _rammingDistance: 3.5
+  _rammingSpeed: 2.5
 --- !u!212 &5233631775223138525
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int _shieldHealth = 3;
     private SpriteRenderer _playerShieldColor;
 
+    [SerializeField] GameObject _explosionVFX;
+
     [SerializeField] private GameObject _leftEngineFailure, _rightEngineFailure;
 
     [SerializeField] private int _totalScore = 0;
@@ -53,6 +55,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _freezeVFXAnimator;
     [SerializeField] private float _freezeCooldown = 3f;
     private float _ogSpeed;
+
+    public List<GameObject> playerLasers = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -171,11 +175,13 @@ public class Player : MonoBehaviour
 
         if(_tripleShotActivated == true)
         {
-            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            GameObject tripleLaser = Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            playerLasers.Add(tripleLaser);
         }
         else
         {
-            Instantiate(_playerLaser, transform.position + laserOffset, Quaternion.identity);
+            GameObject singleLaser = Instantiate(_playerLaser, transform.position + laserOffset, Quaternion.identity);
+            playerLasers.Add(singleLaser);
         }
 
         AudioSource.PlayClipAtPoint(_laserSFX, Camera.main.transform.position, 1f);
@@ -219,6 +225,8 @@ public class Player : MonoBehaviour
             {
                 _lives = 0;
                 _spawnManager.OnPlayerDeath();
+
+                Instantiate(_explosionVFX, transform.position, Quaternion.identity);
 
                 Destroy(this.gameObject);
             }

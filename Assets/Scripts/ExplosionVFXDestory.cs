@@ -23,7 +23,6 @@ public class ExplosionVFXDestory : MonoBehaviour
             Player _player = collision.GetComponent<Player>();
 
             _player.DamagePlayer();
-            _player.DamagePlayer();
 
             Destroy(GetComponent<CircleCollider2D>());
         }

@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float _rammingDistance = 1.5f;
     private SpriteRenderer _spriteRenderer;
+    [SerializeField] private float _rammingSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +71,8 @@ public class Enemy : MonoBehaviour
     private void Movement()
     {
         transform.Translate(new Vector3(0, -1, 0) * enemySpeed * Time.deltaTime);
+
+        _sineMovement.GetComponent<EnemySineMovement>().enabled = true;
 
         if (transform.position.y < _enemyYBounds)
         {
@@ -117,6 +120,7 @@ public class Enemy : MonoBehaviour
                 Laser laserSwordCheck = other.GetComponent<Laser>();
                 if (laserSwordCheck._isLaserSword == false)
                 {
+                    _player.playerLasers.Remove(other.gameObject);
                     Destroy(other.gameObject);
                 }
                 _hasShield = false;
@@ -130,6 +134,7 @@ public class Enemy : MonoBehaviour
             Laser laser = other.transform.GetComponent<Laser>();
             if (laser._isLaserSword == false)
             {
+                _player.playerLasers.Remove(other.gameObject);
                 Destroy(other.gameObject);
             }
 
@@ -169,19 +174,29 @@ public class Enemy : MonoBehaviour
 
     private void EnemyAggression()
     {
-        if (_player != null)
+        if (_player != null && _isAlive)
         {
             if (Vector3.Distance(transform.position, _player.transform.position) <= _rammingDistance)
             {
-                _spriteRenderer.color = Color.red;
+                if (transform.position.y > _player.transform.position.y)
+                {
+                    _spriteRenderer.color = Color.red;
 
-                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position,
-                                                          (enemySpeed / 2) * Time.deltaTime);
+                    _sineMovement.GetComponent<EnemySineMovement>().enabled = false;
+
+                    transform.position = Vector2.MoveTowards(transform.position, _player.transform.position,
+                                                              _rammingSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    Movement();
+                }
             }
 
             else if (Vector3.Distance(transform.position, _player.transform.position) > _rammingDistance)
             {
                 _spriteRenderer.color = Color.white;
+
                 Movement();
             }
         }

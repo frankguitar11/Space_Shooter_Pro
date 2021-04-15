@@ -10,6 +10,7 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private GameObject _explosionVFX;
 
     private SpawnManager _spawnManager;
+    private Player _player;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,12 @@ public class Asteroid : MonoBehaviour
         if(_spawnManager == null)
         {
             Debug.LogError("Spawn Manager is NULL on Asteroid");
+        }
+
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        if(_player == null)
+        {
+            Debug.LogError("Player is NULL");
         }
     }
 
@@ -38,6 +45,7 @@ public class Asteroid : MonoBehaviour
             Instantiate(_explosionVFX, transform.position, Quaternion.identity);
 
             _spawnManager.StartGameSpawning();
+            _player.playerLasers.Remove(collision.gameObject);
 
             Destroy(this.gameObject, 0.3f); ;
         }

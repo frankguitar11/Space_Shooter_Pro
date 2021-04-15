@@ -122,6 +122,7 @@ public class DoubleSidedEnemy : MonoBehaviour
                 Laser laserSwordCheck = other.GetComponent<Laser>();
                 if (laserSwordCheck._isLaserSword == false)
                 {
+                    _player.playerLasers.Remove(other.gameObject);
                     Destroy(other.gameObject);
                 }
                 _hasShield = false;
@@ -133,6 +134,7 @@ public class DoubleSidedEnemy : MonoBehaviour
             Laser laser = other.transform.GetComponent<Laser>();
             if (laser._isLaserSword == false)
             {
+                _player.playerLasers.Remove(other.gameObject);
                 Destroy(other.gameObject);
             }
 
