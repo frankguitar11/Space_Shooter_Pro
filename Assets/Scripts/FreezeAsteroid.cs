@@ -27,6 +27,11 @@ public class FreezeAsteroid : MonoBehaviour
     {
         transform.Translate(Vector3.down * _movementSpeed * Time.deltaTime, Space.World);
         transform.Rotate(Vector3.back * _rotationSpeed * Time.deltaTime, Space.Self);
+
+        if(transform.position.y < -10f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,7 +42,14 @@ public class FreezeAsteroid : MonoBehaviour
             explosion.transform.localScale /= 2;
 
             _player.playerLasers.Remove(collision.gameObject);
-            Destroy(collision.gameObject);
+
+            Laser laser = collision.transform.GetComponent<Laser>();
+            if (laser._isLaserSword == false)
+            {
+                _player.playerLasers.Remove(collision.gameObject);
+                Destroy(collision.gameObject);
+            }
+
             Destroy(this.gameObject);
         }
         else if(collision.CompareTag("Player"))

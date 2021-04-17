@@ -7,6 +7,7 @@ public class ExplosionVFXDestory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Destroy(GetComponent<CircleCollider2D>(), 1.5f);
         Destroy(this.gameObject, 3.0f);
     }
 

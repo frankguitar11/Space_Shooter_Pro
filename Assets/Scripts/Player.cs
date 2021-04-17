@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _freezeVFXAnimator;
     [SerializeField] private float _freezeCooldown = 3f;
     private float _ogSpeed;
+    private bool _isFrozen = false;
 
     public List<GameObject> playerLasers = new List<GameObject>();
 
@@ -108,8 +109,13 @@ public class Player : MonoBehaviour
 
         Vector3 directionInput = new Vector3(horizontalInput, verticalInput, 0);
 
+        Thursters(directionInput);
+    }
+
+    private void Thursters(Vector3 directionInput)
+    {
         //Thruster boost
-        if(Input.GetKey(KeyCode.LeftShift) && currentThrusterLevel > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && currentThrusterLevel > 0)
         {
             if (_canUseThrusters == true)
             {
@@ -122,9 +128,9 @@ public class Player : MonoBehaviour
                 transform.Translate(directionInput * speed * Time.deltaTime);
                 return;
             }
-                 
+
         }
-        else if(Input.GetKey(KeyCode.LeftShift) && currentThrusterLevel <= 0)
+        else if (Input.GetKey(KeyCode.LeftShift) && currentThrusterLevel <= 0)
         {
             StartCoroutine(PlayerThrusterCooldownRoutine());
         }
@@ -227,17 +233,17 @@ public class Player : MonoBehaviour
         else
         {
             _lives--;
-            _cameraShake.MainCameraShake();
+            CameraShake();
 
-            if(_lives == 2)
+            if (_lives == 2)
             {
                 _leftEngineFailure.SetActive(true);
             }
-            else if(_lives == 1)
+            else if (_lives == 1)
             {
                 _rightEngineFailure.SetActive(true);
             }
-            else if(_lives <= 0)
+            else if (_lives <= 0)
             {
                 _lives = 0;
                 _spawnManager.OnPlayerDeath();
@@ -250,6 +256,11 @@ public class Player : MonoBehaviour
             _uiManager.UpdateLives(_lives);
 
         }
+    }
+
+    public void CameraShake()
+    {
+        _cameraShake.MainCameraShake();
     }
 
     public void ActivateTripleShot()
@@ -354,19 +365,22 @@ public class Player : MonoBehaviour
 
     public void FreezeVFXActivate()
     {
-        _ogSpeed = speed;
-
-        speed /= speed;
+        if (_isFrozen == false)
+        {
+            _ogSpeed = speed;
+            speed /= speed;
+            StartCoroutine(FreezeCooldownRoutine());
+        }
+        _isFrozen = true;
         _freezeVFX.SetActive(true);
         _thrusterVFX.SetActive(false);
         _freezeVFXAnimator.SetBool("Player_Frozen", true);
-
-        StartCoroutine(FreezeCooldownRoutine());
     }
 
     IEnumerator FreezeCooldownRoutine()
     {
         yield return new WaitForSeconds(_freezeCooldown);
+        _isFrozen = false;
         speed *= _ogSpeed;
         _freezeVFXAnimator.SetBool("Player_Frozen", false);
         _thrusterVFX.SetActive(true);

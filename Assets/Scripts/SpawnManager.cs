@@ -23,6 +23,8 @@ public class SpawnManager : MonoBehaviour
 
     private UIManager _uiManager;
 
+    [SerializeField] GameObject _bossEnemyPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,16 @@ public class SpawnManager : MonoBehaviour
     {
         if (_currentEnemies <= 0 && _spawnEnemyWave == false)
         {
+            if(_waveNumber == 8)
+            {
+                Vector3 bossSpawn = new Vector3(0, _ySpawn + 10, 0);
+                Instantiate(_bossEnemyPrefab, bossSpawn, Quaternion.identity);
+
+                _currentEnemies++;
+
+                return;
+            }
+
             //EnableNextWaveSpawning();
             _uiManager.SpawnNextWave();
             StartEnemySpawning();

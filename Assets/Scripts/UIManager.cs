@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
 
     private SpawnManager _spawnManager;
 
+    [SerializeField] Image _bossHealthFill;
+    [SerializeField] GameObject _bossHealthInfo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -117,5 +120,15 @@ public class UIManager : MonoBehaviour
 
         _waveText.gameObject.SetActive(false);
 
+    }
+
+    public void UpdateBossHealth(float currentHealth, float maxHealth)
+    {
+        _bossHealthFill.fillAmount = Mathf.Clamp(currentHealth / maxHealth, 0, 1f);
+    }
+
+    public void DisplayBossHealth(bool toggle)
+    {
+        _bossHealthInfo.SetActive(toggle);
     }
 }
