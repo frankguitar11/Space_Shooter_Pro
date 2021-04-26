@@ -62,3 +62,7 @@ crashlytics-build.properties
 [Aa]ssets/[Gg]ame[Dd]ev[Hh][Qq]/[Ff]ile[Bb]ase/[Pp]lugin/
 [Aa]ssets/[Gg]ame[Dd]ev[Hh][Qq]/[Ff]ile[Bb]ase/[Pp]lugin.meta
 
+#Builds
+/[Ww]ebGL Build/
+/[Ww]indows Build/
+
