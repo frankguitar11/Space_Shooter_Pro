@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _thrusterSpeedMultiplier = 1.2f;
     public float maxThrusterFill = 50f;
     public float currentThrusterLevel = 25f;
-    [SerializeField] private float _thrusterUsageAmount = 10f;
+    [SerializeField] private float _thrusterUsageAmount = 20f;
     private bool _canUseThrusters = true;
     private int _thrusterCooldown = 5;
 
@@ -109,10 +109,10 @@ public class Player : MonoBehaviour
 
         Vector3 directionInput = new Vector3(horizontalInput, verticalInput, 0);
 
-        Thursters(directionInput);
+        Thrusters(directionInput);
     }
 
-    private void Thursters(Vector3 directionInput)
+    private void Thrusters(Vector3 directionInput)
     {
         //Thruster boost
         if (Input.GetKey(KeyCode.LeftShift) && currentThrusterLevel > 0)

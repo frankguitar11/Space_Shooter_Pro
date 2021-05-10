@@ -38,8 +38,14 @@ public class EnemyBomb : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             _player.DamagePlayer();
+            Instantiate(_bombExplosionVFX, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }     
+    }
+
+    public void Explode()
+    {
+        StartCoroutine(BombExplodeRoutine());
     }
 
     public void BombExplosion()
@@ -47,10 +53,6 @@ public class EnemyBomb : MonoBehaviour
         Instantiate(_bombExplosionVFX, transform.position, Quaternion.identity);
     }
 
-    public void Explode()
-    {
-        StartCoroutine(BombExplodeRoutine());
-    }
 
     IEnumerator BombExplodeRoutine()
     {

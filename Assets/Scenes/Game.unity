@@ -2385,5 +2385,10 @@ PrefabInstance:
       propertyPath: _cameraShake
       value: 
       objectReference: {fileID: 361688925}
+    - target: {fileID: 8798565361059293929, guid: b09663d950208bd469043aa54f779cc5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b09663d950208bd469043aa54f779cc5, type: 3}

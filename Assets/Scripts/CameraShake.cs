@@ -23,6 +23,7 @@ public class CameraShake : MonoBehaviour
             this.transform.position = transform.position + Random.insideUnitSphere * _shakeAmount;
             _shake -= Time.deltaTime * _decreaseFactor;
         }
+        //remain at OG position
         else
         {
             _shake = 0;

@@ -6,7 +6,7 @@ public class EnemySineMovement : MonoBehaviour
 {
 
     [SerializeField] float CurveSpeed = 5;
-    [SerializeField] float MoveSpeed = 1;
+    [SerializeField] float MoveSpeed = 0.1f;
     [SerializeField] private float _curveRadius = 2f;
 
     private float fTime = 0;

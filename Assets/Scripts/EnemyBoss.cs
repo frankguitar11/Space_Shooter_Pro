@@ -12,8 +12,8 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] float _bossMaxHealth = 10;
     [SerializeField] float _bossCurrentHealth = 10;
 
-    [SerializeField] float _asteroidRadius = 3f;
-    [SerializeField] float _radiusYOffset = 1f;
+    //[SerializeField] float _asteroidRadius = 3f;
+    //[SerializeField] float _radiusYOffset = 1f;
 
     [SerializeField] Transform[] _bossWaypoints;
     [SerializeField] int _randomWaypoint;
@@ -128,13 +128,9 @@ public class EnemyBoss : MonoBehaviour
 
             for (int i = 0; i < _numberOfFireballs; i++)
             {
-                if (Time.time > _canFire && _isAlive == true)
-                {
-                    _fireRate = Random.Range(0.5f, 1f);
-                    _canFire = Time.time + _fireRate;
+                yield return new WaitForSeconds(0.5f);
 
-                    ShootFireBall();
-                }
+                ShootFireBall();
             }
         }
     }
@@ -216,7 +212,7 @@ public class EnemyBoss : MonoBehaviour
         explosion3.GetComponent<SpriteRenderer>().color = Color.red;
     }
 
-
+    /*
     //To set up asteroid belt
     private void OnDrawGizmos()
     {
@@ -225,5 +221,6 @@ public class EnemyBoss : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position + radiusOffset , _asteroidRadius);
     }
+    */
 
 }

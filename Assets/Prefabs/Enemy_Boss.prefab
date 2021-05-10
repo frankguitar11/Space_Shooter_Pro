@@ -214,8 +214,8 @@ MonoBehaviour:
   _isAlive: 1
   _bossMaxHealth: 10
   _bossCurrentHealth: 10
-  _asteroidRadius: 3
-  _radiusYOffset: 1
+  _asteroidRadius: 3.33
+  _radiusYOffset: -0.02
   _bossWaypoints:
   - {fileID: 2785123753764290810, guid: 71f4e5879e4ac084786ed197cd599d14, type: 3}
   - {fileID: 646668962137423176, guid: aba9c43f254627145927d893c8e5ae02, type: 3}
